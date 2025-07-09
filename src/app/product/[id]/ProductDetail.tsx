@@ -268,6 +268,10 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
       return hardcodedDetails;
     }
     
+    // Generate deterministic review count based on product ID
+    const productIdNum = parseInt(product.id) || 1;
+    const reviewCount = 100 + (productIdNum * 23) % 500; // Deterministic but varied
+    
     // Generate fallback details based on product category
     const fallbackDetails = {
       description: `${product.name} is a high-quality product from our ${product.category} collection. This premium item offers excellent value and performance for discerning customers.`,
@@ -289,7 +293,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
       },
       reviews: {
         average: 4.5,
-        count: Math.floor(Math.random() * 500) + 100
+        count: reviewCount
       }
     };
     
